@@ -1,0 +1,247 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,margin=0.72in,headheight=25pt,headsep=12pt,footskip=20pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage{graphicx,booktabs,amsmath,siunitx,tabularx,array,fancyhdr,caption,enumitem}
+\usepackage[table]{xcolor}
+\usepackage{titlesec}
+\usepackage{placeins}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\definecolor{reportblue}{RGB}{0,59,112}
+\definecolor{lightblue}{RGB}{237,242,247}
+\titleformat{\section}{\Large\bfseries\color{reportblue}}{\thesection}{0.7em}{}
+\titleformat{name=\section,numberless}{\Large\bfseries\color{reportblue}}{}{0pt}{}
+\titleformat{\subsection}{\large\bfseries\color{reportblue}}{\thesubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{1.15ex plus .2ex}{.55ex}
+\titlespacing*{\subsection}{0pt}{.9ex plus .2ex}{.35ex}
+\hypersetup{colorlinks=true,linkcolor=reportblue,citecolor=reportblue,urlcolor=reportblue}
+\graphicspath{{results/figures/}}
+\captionsetup{font=small,labelfont={bf,color=reportblue},justification=raggedright,singlelinecheck=false}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlist{nosep,leftmargin=1.5em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{reportblue}eROSITA and Gaia analysis}
+\fancyhead[R]{\small\color{reportblue}1eRASS J052113.8--520257}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{reportblue}\leaders\hrule height \headrulewidth\hfill}}
+
+
+\title{\vspace{-1.4em}\color{reportblue}\textbf{eROSITA X-ray and Gaia Optical Analysis}\\[3pt]
+\large 1eRASS J052113.8--520257 (EC 05200--5205)}
+\author{
+\textcolor{reportblue}{\small Group Members}\\[-2pt]
+\small\begin{tabular}{lr}Gone Nishanth & 230421\\Koneti Karthik & 230568\\B VivekaVardhan & 230292\end{tabular}}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\vspace{-1.1em}
+
+\section*{Summary}
+Cataclysmic variables are interacting binary systems in which a white dwarf accretes material from a companion. This report uses Gaia DR3 data to identify the optical counterpart of 1eRASS J052113.8--520257, estimate its distance, and examine how its optical brightness changes over time. We also search the G-band observations for a repeating signal. The best-supported counterpart is Gaia DR3 source 4772021167680733696, separated by 0.83834 arcsec from the eROSITA source-region centre; the candidate CSV gives a separate 0.021174 arcsec offset from its rounded reference position. Its parallax gives a formal inverse-parallax distance of $539.50\pm7.13$ pc. The 39 valid G-band observations span 940.56 days and show a total magnitude range of 3.455 mag. The unweighted periodogram shows a prominent feature near 33.92 h, close to the 34-hour value reported in the literature. Its global false-alarm probability (FAP), however, is 0.257 and does not meet the adopted 1\% significance criterion. The available observations therefore do not establish a reliable orbital period.
+
+
+\section{Part A: eROSITA X-ray spectral analysis}
+\subsection{Data and fitting procedure}
+The eROSITA source spectrum was fitted in XSPEC using the absorbed, collisionally ionised thermal-plasma model
+\[
+\texttt{tbabs}\times\texttt{apec}.
+\]
+The source spectrum was analysed over 0.2--8.0 keV with the associated background spectrum, response matrix (RMF) and ancillary response (ARF). The background spectrum was grouped to a minimum of three counts per grouped bin, and the C-statistic was used for the fit. The absorption abundance table was set to Wilms et al. abundances and the APEC model used AtomDB version 3.1.3. The fitted parameters were the equivalent hydrogen column density $N_{\rm H}$, plasma temperature $kT$, and APEC normalisation. Abundance and redshift were fixed at 1 and 0, respectively.
+
+\subsection{Best-fit parameters}
+The best fit gives $N_{\rm H}=0.02198\times10^{22}\ {\rm cm}^{-2}$ and $kT=5.43$ keV. The 90\% confidence intervals from the XSPEC error search are reported in Table~\ref{tab:xrayfit}. The fit statistic is $C=527.31$ for 776 bins (773 degrees of freedom).
+
+\begin{table}[!ht]
+\centering\small
+\begin{tabular}{lcc}
+\toprule
+\rowcolor{lightblue}\textcolor{reportblue}{\textbf{Parameter}} &
+\textcolor{reportblue}{\textbf{Best fit}} &
+\textcolor{reportblue}{\textbf{90\% confidence interval}}\\
+\midrule
+$N_{\rm H}$ ($10^{22}\ {\rm cm}^{-2}$) & 0.02198 & 0.00587--0.04533\\
+$kT$ (keV) & 5.43 & 3.05--13.46\\
+APEC norm & $9.486\times10^{-4}$ & $(8.352$--$10.984)\times10^{-4}$\\
+\bottomrule
+\end{tabular}
+\caption{Best-fit parameters for the absorbed APEC model. Confidence intervals are 90\%.}
+\label{tab:xrayfit}
+\end{table}
+
+\subsection{Spectrum and interpretation}
+Figure~\ref{fig:erosita_spectrum} shows the observed eROSITA spectrum, the best-fit model and the residuals. The spectrum is strongest around 0.8--1.1 keV and declines towards higher energies. The fitted temperature of $5.43^{+8.03}_{-2.38}$ keV indicates a hot, optically thin plasma, consistent with high-energy emission from an accretion-heated region in a cataclysmic variable~\cite{pageshaw}. The uncertainty is broad, so the temperature should not be interpreted more precisely than the data allow. Some residual deviations are visible around 0.8--1.1 keV; the fit should therefore not be described as reproducing every spectral bin perfectly.
+
+The absorbed and unabsorbed model fluxes in the 0.2--2.3 keV band are $7.47\times10^{-13}$ and $8.40\times10^{-13}\ {\rm erg\,cm^{-2}\,s^{-1}}$, respectively. Using the Gaia distance estimate of 539.50 pc from Part B, the corresponding unabsorbed band luminosity is approximately
+\[
+L_{\rm X}=4\pi d^2F_{\rm X}\simeq2.93\times10^{31}\ {\rm erg\,s^{-1}}.
+\]
+This is a band-limited X-ray luminosity and is not a bolometric luminosity.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.88\linewidth]{erosita_spectrum_with_residuals.png}
+\caption{eROSITA X-ray spectrum of 1eRASS J052113.8--520257 fitted with an absorbed APEC thermal-plasma model ($\texttt{tbabs}\times\texttt{apec}$). The lower panel shows residuals between the observed spectrum and the best-fit model.}
+\label{fig:erosita_spectrum}
+\end{figure}
+\FloatBarrier
+
+\section{Part B: Optical counterpart and distance}
+\subsection{Identification and catalogue properties}
+Of the three Gaia candidates found near the target position, source 4772021167680733696 is the closest by a wide margin. The candidate-match CSV reports a separation of 0.021174 arcsec from its rounded reference position (RA $80.3076200^\circ$, Dec $-52.0497800^\circ$). This is not the offset from the eROSITA position. The eROSITA source-region centre, read from the source-region information in the supplied FITS file, is RA $80.307391613^\circ$ and Dec $-52.049972719^\circ$ (ICRS); the Gaia source is 0.83834 arcsec from this position. The other two candidates lie 3.85424 and 7.00341 arcsec, respectively, from the same eROSITA source-region centre. The selected source is also the only candidate with epoch photometry in the supplied data and has a well-measured parallax, with a signal-to-noise ratio of 75.64. Taken together, these positional, astrometric and photometric properties make it the most convincing optical counterpart among the candidates. The catalogue measurements are from Gaia DR3~\cite{gaiadr3}.
+
+\begin{table}[!ht]
+\centering\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.39\linewidth}X}
+\toprule
+\rowcolor{lightblue}\textcolor{reportblue}{\textbf{Quantity}} & \textcolor{reportblue}{\textbf{Value}}\\
+\midrule
+Source identifier & 4772021167680733696\\
+Right ascension & $80.3076169834^\circ$\\
+Declination & $-52.0497855815^\circ$\\
+CSV reference-position offset & 0.021174 arcsec\\
+eROSITA source-region centre & $80.307391613^\circ$, $-52.049972719^\circ$ (ICRS)\\
+Gaia--eROSITA separation & 0.83834 arcsec\\
+Parallax & $1.853551218\pm0.024504205$ mas\\
+Proper motion ($\mu_{\alpha*},\mu_\delta$) & $-0.081433\pm0.035823$; $-13.098938\pm0.032663$ mas yr$^{-1}$\\
+Mean G / BP / RP & 15.940396 / 16.067738 / 15.675299 mag\\
+RUWE & 1.003665\\
+\bottomrule
+\end{tabularx}
+\caption{Astrometric and mean-photometric measurements for the selected Gaia DR3 counterpart.}
+\end{table}
+
+The angular separation is small compared with those of the other candidates, which strongly favours this positional association within the searched region. The parallax is also measured precisely relative to its uncertainty. The RUWE value is taken from the Gaia DR3 main source table, \texttt{gaiadr3.gaia\_source}, for this source identifier; it is not a column in the candidate-match CSV. Proper motion describes how the source moves across the sky, while the Renormalised Unit Weight Error (RUWE) indicates how well a single-source astrometric model fits the observations. A value close to unity is consistent with a good astrometric fit, but it does not prove that the system contains only one star or reveal its binary orbital properties.
+
+\subsection{Parallax distance}
+For parallax $p$ in milliarcseconds, the inverse-parallax estimate is
+\begin{equation}
+d=\frac{1000}{p}\quad\mathrm{pc}.
+\end{equation}
+Using the measured parallax and its formal uncertainty gives
+\begin{align*}
+d &= \frac{1000}{1.853551218}=539.5049\ \mathrm{pc},\\
+\sigma_d &\simeq \left|\frac{\partial d}{\partial p}\right|\sigma_p
+=\frac{1000(0.024504205)}{(1.853551218)^2}=7.1323\ \mathrm{pc}.
+\end{align*}
+The resulting distance is $539.50\pm7.13$ pc, or about $1759.6\pm23.3$ light-years. This uncertainty comes from propagating the formal parallax error to first order. It does not include systematic effects such as the Gaia parallax zero point, and the inverse-parallax estimate is not a full Bayesian distance inference. Given the high parallax signal-to-noise ratio, it is a useful approximation for this source. The distance also provides the scale needed for a future luminosity estimate, although that would require accounting for extinction and applying an appropriate bolometric correction.
+
+As an independent catalogue comparison, Table A1 of Maan et al. lists a distance of $545\pm15$ pc for this source~\cite{maan2025}. This is consistent with the Gaia DR3 inverse-parallax estimate within the quoted uncertainties. The comparison supports the scale of the distance estimate, while remaining distinct from the calculation performed here.
+\FloatBarrier
+
+\section{Part C: Gaia G-band light curve}
+\subsection{Gaia observations and quality assessment}
+The raw epoch-photometry file contains 40 G-band transit records. One record has non-finite time and photometric values and no CCD observations, so it cannot be used. The remaining 39 measurements agree with the corresponding entries in the derived G-band data. Among these valid observations, 29 carry Gaia's noisy-data flag and two carry the G-rejected flag; a third rejected flag belongs to the invalid record. The noisy-data flag is a warning to interpret a measurement with care, not an instruction to discard it. We therefore retain these observations and mark them in the figures. The two valid G-rejected measurements are left out of the primary period search, and we check separately whether including them changes the result.
+
+The target is classified as a cataclysmic variable: a binary system in which a white dwarf draws material from a companion. The accretion flow can produce changing optical emission, although the broad physical processes in accreting white-dwarf systems are varied~\cite{pageshaw}. Gaia's G-band measurement combines the light from the unresolved system. These observations cannot separate the contributions of the white dwarf, companion and accretion flow, nor can they explain the cause of each bright or faint visit. For that reason, the analysis first describes the variability that is actually observed and then asks whether the data also support a stable repeating signal.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.84\linewidth]{gaia_G_band_lightcurve.png}
+\caption{Gaia G-band Vega magnitude as a function of BJD$_{\rm TCB}$. The magnitude axis is inverted, so brighter measurements appear higher. Error bars are propagated from the flux uncertainties; noisy epochs are orange and G-rejected epochs are red. All 39 valid observations are shown without connecting lines.}
+\end{figure}
+
+\subsection{Sampling and observed variability}
+The G-band magnitude ranges from 13.435 to 16.890, a total span of 3.455 mag. The 39 valid observations cover 940.558 days, or about 2.58 years. The largest gap between visits is 64.886 days. A few observations occur in pairs separated by roughly two hours, but many visits are weeks apart. The light curve therefore gives a set of snapshots of the source rather than a continuous record. Any short-lived event, or change that took place during a long gap, is not resolved by these data.
+
+The source changes noticeably in brightness, with a few isolated bright measurements and other intervals where the variations are smaller. There is no obvious repeating shape in the light curve. Changes in the accretion flow of a cataclysmic variable can affect its optical emission, but the present observations are not enough to identify a particular accretion state or explain individual bright and faint points. Gaia's broad G band also combines light from the unresolved system, so it cannot separate the accretion disc, white dwarf and companion. The light curve clearly shows optical variability, but it does not by itself show that this variability is tied to the binary orbit.
+
+\subsection{Photometric quality and interpretation}
+We keep the 29 noisy-flagged measurements because this flag calls for caution; it does not mean that every such measurement is unusable. Removing all of them would leave very few observations and would also change the already uneven sampling. The two valid G-rejected measurements are shown separately and excluded from the main period search. When they are included in a check, the preferred unweighted period changes very little, but the FAP remains above the adopted significance threshold. Thus, the conclusion below does not hinge on the treatment of these two points.
+
+The error bars show the formal measurement uncertainties, not the full range of the source's intrinsic variability. This matters because the brightness changes are much larger than the measurement errors alone would suggest. With so few visits, an isolated bright point cannot confidently be labelled an outburst or assigned a physical timescale. More frequent optical monitoring would be needed to follow such events and to tell persistent modulation apart from temporary changes in brightness.
+\FloatBarrier
+
+\section{Part D: Lomb--Scargle period analysis}
+\subsection{Method and search range}
+The Gaia observations are unevenly spaced, so a method that can work directly with the measured times is needed. The Lomb--Scargle periodogram does this by testing sinusoidal models without first interpolating the data onto a regular time grid. We use the generalized form, with a floating mean and one sinusoidal harmonic~\cite{vanderplas2018,astropy2022}. At a trial frequency $f$, the fitted model is
+\begin{equation}
+m(t)=C+A\cos(2\pi f t)+B\sin(2\pi f t),\qquad P=\frac{1}{f},
+\end{equation}
+where $C$ is the fitted mean and $A$ and $B$ determine the sinusoidal amplitude and phase. The periodogram power measures how much the sinusoidal model improves the fit relative to a constant-brightness model. It therefore tests for a coherent sinusoidal component, rather than every possible form of variability that may occur in a cataclysmic variable.
+
+For the main period search, each retained observation is given equal weight. The formal magnitude uncertainties derived from the Gaia flux errors range from 0.001261 to 0.057179 mag. These values describe the precision of individual measurements, but they do not necessarily capture the source's intrinsic brightness changes. Giving every epoch equal weight provides a useful way to avoid letting a small number of very precise measurements dominate this sparse time series. This choice is not automatically superior to a weighted analysis; it is the approach used for the principal result here, and its limitations are considered below.
+
+The main search covers frequencies from 0.02 to 24 cycles per day, corresponding to periods from 50 days down to 1 hour. The frequency grid is sampled more finely than the inverse of the full observation baseline, so nearby features in the periodogram can be examined. Because the Gaia visits are irregular, a Nyquist limit based on uniform sampling is not appropriate. A fine grid, however, cannot fill the long gaps or compensate for the small number of measurements.
+
+We estimate the global false-alarm probability using the Baluev approximation over the full frequency range. In practical terms, it estimates how often the adopted noise-only model would produce a peak at least this strong somewhere in the search. We use 1\% as the significance threshold. The FAP depends on the assumed model and noise behaviour; it should not be read as the probability that a particular physical period is wrong.
+
+\subsection{Period-search result and significance}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.86\linewidth]{lomb_scargle_periodogram.png}
+\caption{Unweighted Lomb--Scargle periodogram for the 37-observation primary sample. The prominent feature remains below the adopted 1\% global false-alarm significance threshold.}
+\end{figure}
+
+The most prominent feature in the unweighted periodogram corresponds to a period of 33.9223 hours (about 1.4134 days). Its power is 0.5261 and its global FAP is 0.257, well above both 0.05 and the adopted 0.01 threshold. The feature is therefore not statistically significant, and these observations do not justify identifying it as the system's orbital period. Including the two G-rejected measurements gives a very similar period, close to 33.92 hours, but the global FAP remains high at 0.171. The conclusion is the same in either case: no significant period is detected in this dataset.
+
+A periodogram always has a most prominent peak, but that peak is not necessarily evidence of a real period. Here it does not pass the global significance test, and the irregular brightness changes are not well described by a single sinusoid. We therefore quote 33.92 hours as a candidate timescale for comparison, not as a measured orbital period.
+
+\subsection{Comparison with published period and phase-folded light curve}
+Table A1 of Maan et al. lists a 34-hour photometric period for 1eRASS J052113.8--520257, derived from Gaia DR3 time-series data~\cite{maan2025}. The period found here is close to that value, which makes the comparison interesting. However, the agreement should be treated cautiously: the candidate in our analysis has a global FAP of 0.257 and does not meet the adopted significance criterion. We use the published period as an independent point of comparison, not as a value to impose on the present data.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=.72\linewidth]{phase_folded_lightcurve.png}
+\caption{G-band observations folded at the strongest candidate period from the unweighted periodogram. G-rejected observations are identified separately. The observations do not trace a sufficiently coherent repeating profile to confirm an orbital period.}
+\end{figure}
+
+Each observation is assigned a phase using
+\begin{equation}
+\phi=\left(\frac{t-t_0}{P}\right)\bmod 1,
+\end{equation}
+where $t_0=2456933.355081900$ BJD$_{\rm TCB}$ is the reference epoch and $P=1.4134276951$ days is the candidate period from the unweighted analysis. Folding brings observations from different dates onto a common 0--1 phase interval, making it easier to see whether they follow a repeating pattern. In this case, the points remain scattered rather than tracing a clear profile. Since the periodogram peak is not significant, the folded curve is useful for inspection but does not confirm an orbital modulation.
+
+\FloatBarrier
+\section*{Conclusion}
+The Gaia DR3 source 4772021167680733696 is the best-supported optical counterpart among the candidates, and its parallax places it at a formal distance of $539.50\pm7.13$ pc. The 39 valid G-band observations show substantial but irregular changes in brightness over 2.58 years. The unweighted Lomb--Scargle analysis identifies a candidate timescale near 33.92 hours, close to the 34-hour value reported in the literature. However, the global FAP of 0.257 is above the adopted 1\% threshold, and the phase-folded observations do not form a clear repeating pattern. The Gaia data therefore establish the counterpart, distance and optical variability, but do not provide a statistically reliable orbital period.
+
+\begin{thebibliography}{99}
+
+\bibitem{pageshaw}
+K.~L. Page and A.~W. Shaw,
+``X-ray emission mechanisms in accreting white dwarfs,''
+in \emph{Handbook of X-ray and Gamma-ray Astrophysics} (2022).
+Available at \url{https://arxiv.org/abs/2209.15262}.
+\url{https://doi.org/10.1007/978-981-16-4544-0_106-1}.
+
+\bibitem{gaiadr3}
+Gaia Collaboration et al.,
+``Gaia Data Release 3: Summary of the content and survey properties,''
+\emph{Astronomy \& Astrophysics}, vol.~674, A1 (2023).
+\url{https://doi.org/10.1051/0004-6361/202243940}.
+
+\bibitem{maan2025}
+V.~Maan, A.~Katira, and K.~P. Mooley,
+``Galactic X-ray transients in the first eROSITA all sky survey,''
+\emph{Monthly Notices of the Royal Astronomical Society},
+vol.~544, pp.~885--910 (2025).
+\url{https://doi.org/10.1093/mnras/staf1752}.
+
+\bibitem{vanderplas2018}
+J.~T. VanderPlas,
+``Understanding the Lomb--Scargle periodogram,''
+\emph{The Astrophysical Journal Supplement Series}, vol.~236, 16 (2018).
+\url{https://doi.org/10.3847/1538-4365/aab766}.
+
+\bibitem{astropy2022}
+Astropy Collaboration et al.,
+``The Astropy Project: Sustaining and growing a community-oriented open-source project and the latest major release (v5.0) of the core package,''
+\emph{The Astrophysical Journal}, vol.~935, no.~2, 167 (2022).
+\url{https://doi.org/10.3847/1538-4357/ac7c74}.
+
+\end{thebibliography}
+
+\section*{Project GitHub Repository}
+The complete project code and associated files are available at the following GitHub repository: \href{https://github.com/nishanthgone/SPA660_Project}{SPA660 Project on GitHub}.
+\end{document}

@@ -1,0 +1,116 @@
+{
+  "time_reference": "BJD_TCB days",
+  "primary_n": 37,
+  "sensitivity_n": 39,
+  "noisy_n_39": 29,
+  "g_rejected_n_39": 2,
+  "invalid_fit_record_g_reject_n": 1,
+  "baseline_days": 940.5578108285554,
+  "frequency_step_per_day": 0.0002126397736507192,
+  "frequency_grid_points": 112844,
+  "search_ranges": {
+    "max_period_50d": [
+      0.02,
+      24.0
+    ],
+    "max_period_100d": [
+      0.01,
+      24.0
+    ],
+    "max_period_200d": [
+      0.005,
+      24.0
+    ],
+    "period_1_to_1000h": [
+      0.024,
+      24.0
+    ]
+  },
+  "configuration": "Astropy LombScargle, fit_mean=True, center_data=True, nterms=1, normalization=standard; same times/grid/config for weighted and unweighted",
+  "weighted_definition": "dy=sigma_mag; inverse variance weights 1/sigma_mag^2",
+  "unweighted_definition": "dy=None",
+  "literature_period_hours": 34.0,
+  "literature_frequency_per_day": 0.7058823529411765,
+  "results_primary_37": {
+    "weighted": {
+      "grid_index": 74,
+      "grid_frequency_per_day": 0.020637919320952162,
+      "grid_power": 0.7427323142726902,
+      "refined_parent_grid_frequency_per_day": 15.90504165080342,
+      "refined_frequency_per_day": 15.904977119839032,
+      "refined_period_days": 0.06287340072640862,
+      "refined_period_hours": 1.5089616174338072,
+      "refined_power": 0.7536699755386916,
+      "local_refinement_success": true,
+      "power_at_exact_34h": 0.014423429621508362,
+      "short_range_grid_frequency_per_day": 13.15709785591516,
+      "short_range_grid_period_hours": 1.8241104735122189,
+      "short_range_grid_power": 0.7427201262438681,
+      "short_range_refined": {
+        "grid_index": 61762,
+        "grid_frequency_per_day": 13.15709785591516,
+        "grid_power": 0.7427201262438681,
+        "refined_parent_grid_frequency_per_day": 15.90504165080342,
+        "refined_frequency_per_day": 15.904977119839032,
+        "refined_period_days": 0.06287340072640862,
+        "refined_period_hours": 1.5089616174338072,
+        "refined_power": 0.7536699755386916,
+        "local_refinement_success": true
+      },
+      "short_range_half_prominence_width_per_day": 0.0008475416757178778,
+      "short_range_half_prominence_left_frequency_per_day": 15.90458356907064,
+      "short_range_half_prominence_right_frequency_per_day": 15.905431110746358
+    },
+    "unweighted": {
+      "grid_index": 3304,
+      "grid_frequency_per_day": 0.7074643882127792,
+      "grid_power": 0.5229563480628566,
+      "refined_parent_grid_frequency_per_day": 0.7074643882127792,
+      "refined_frequency_per_day": 0.7074999332967404,
+      "refined_period_days": 1.4134276950957376,
+      "refined_period_hours": 33.92226468229771,
+      "refined_power": 0.5260875527822431,
+      "local_refinement_success": true,
+      "power_at_exact_34h": 0.04464044978004517,
+      "short_range_grid_frequency_per_day": 0.7074643882127792,
+      "short_range_grid_period_hours": 33.92396903627845,
+      "short_range_grid_power": 0.5229563480628566,
+      "short_range_refined": {
+        "grid_index": 3214,
+        "grid_frequency_per_day": 0.7074643882127792,
+        "grid_power": 0.5229563480628566,
+        "refined_parent_grid_frequency_per_day": 0.7074643882127792,
+        "refined_frequency_per_day": 0.7074999332967404,
+        "refined_period_days": 1.4134276950957376,
+        "refined_period_hours": 33.92226468229771,
+        "refined_power": 0.5260875527822431,
+        "local_refinement_success": true
+      },
+      "short_range_half_prominence_width_per_day": 0.000979890962435448,
+      "short_range_half_prominence_left_frequency_per_day": 0.7068626710279728,
+      "short_range_half_prominence_right_frequency_per_day": 0.7078425619904083
+    }
+  },
+  "max_weight": 629031.318022886,
+  "min_weight": 305.85290210256767,
+  "weight_ratio_max_over_min": 2056.6465568861613,
+  "sigma_mag_min": 0.001260851286036522,
+  "sigma_mag_max": 0.057179940243665364,
+  "unweighted_34h_bootstrap": {
+    "replicates": 400,
+    "seed": 92311,
+    "noise_model": "best-fit sinusoid plus iid Gaussian residual noise with standard deviation equal to observed unweighted sinusoid-fit residual scatter; fixed observation times",
+    "residual_std_mag": 0.5968815283009173,
+    "period_hours_median": 33.9218630677193,
+    "period_hours_16_84_percentile": [
+      33.91842356067052,
+      33.925975248498126
+    ],
+    "frequency_search_window_per_day": [
+      0.6574999332967404,
+      0.7574999332967405
+    ],
+    "assumption_warning": "Conditional formal uncertainty only; it does not include correlated/transient variability or model misspecification."
+  },
+  "significance_note": "Baluev FAP is computed independently for each weighting and each searched frequency interval; weighted and unweighted FAPs are not directly interchangeable."
+}
